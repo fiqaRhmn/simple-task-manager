@@ -1,13 +1,192 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* General styling */
+body, html {
+  background-color: #2c3e50; /* Dark grey background */
+  color: white; /* White text */
+  font-family: 'Arial', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.main--content {
+  background-color: #34495e; /* Lighter grey for the app content background */
+  max-width: 100vw;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  color: #ecf0f1; /* Light grey for headings */
+}
+
+.tasks-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.task-category {
+  flex-basis: 30%; /* Each category will take up roughly a third of the container width */
+  text-align: center;
+  padding: 10px;
+  background-color: #34495e; /* Lighter grey */
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Input and Button Styles */
+input[type='text'],
+textarea,
+select {
+  width: 50%;
+  padding: 10px;
+  margin: 10px;
+  background-color: #47525e; /* Input background */
+  border: 1px solid #7f8c8d; /* Border color */
+  color: #ecf0f1; /* Text color */
+  border-radius: 4px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Spreads out the children */
+  margin-bottom: 10px;
+}
+
+.form-row input[type='text'],
+.form-row textarea {
+  flex: 1; /* Takes equal width */
+}
+
+/* The date input should not grow with the flex container */
+.date-input {
+  flex: 0 0 200px; /* Do not grow, do not shrink, stay at 200px */
+  margin-right: 10px; /* Adjust spacing as needed */
+}
+
+.priority-dropdown {
+  flex: 0 0 200px; /* Do not grow, do not shrink, stay at 200px */
+  margin-left: 10px; /* To ensure it doesn't touch the textarea */
+}
+
+/* Reset the margin for all form-row children if it's the last child */
+.form-row > *:last-child {
+  margin-right: 0;
+}
+
+/* Specific style if you need to handle the form row for the title input separately */
+.title-input-row input[type='text'] {
+  margin-right: 10px; /* Space between title input and date input */
+}
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.SearchBar button,
+.TodoForm button {
+  background-color: #2980b9; /* Nice blue */
+  color: #ecf0f1; /* White text */
+}
+
+.SearchBar button:hover,
+.TodoForm button:hover {
+  background-color: #3498db; /* Lighter blue */
+}
+
+/* Task List Styles */
+.TodoList-item,
+.OverdueList-item,
+.DoneList-item {
+  background-color: #47525e; /* Lighter grey for items */
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+}
+
+.OverdueList-item {
+  border-left: 5px solid #c0392b; /* Highlight overdue items with a red border */
+}
+
+.DoneList-item {
+  opacity: 0.7; /* Dim completed tasks for visual cue */
+}
+
+button.edit, button.delete, button.done {
+  background-color: #2980b9; /* Matching the form buttons */
+  color: #ecf0f1; /* White text for buttons */
+}
+
+button.edit:hover, button.delete:hover, button.done:hover {
+  background-color: #3498db; /* Lighter blue for hover state */
+}
+
+/* Ensuring white text for easier reading */
+.TodoList-item span, .OverdueList-item span, .DoneList-item span {
+  color: #ecf0f1; /* White text */
+}
+
+/* Styles for the task container */
+.todo--container {
+  background-color: #47525e; /* Your chosen grey color */
+  padding: 20px;
+  margin: 0 auto 20px; /* Centers the card and adds spacing between cards */
+  max-width: 500px; /* Adjust to your preferred width */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #ecf0f1; /* White text color */
+}
+
+/* Styles for the list and list items */
+.todo--list li {
+  list-style: none; /* Removes bullet points */
+  border-bottom: 1px solid #34495e; /* Adds a subtle line between task details and buttons */
+  padding-bottom: 20px; /* Spacing between task details and buttons */
+}
+
+/* Header and paragraph styling */
+.todo--list h3,
+.todo--list p {
+  margin: 5px 0; /* Adds margin to top and bottom of headers and paragraphs */
+  text-align: left; /* Align text to the left */
+}
+
+/* Button container to center the buttons */
+.todo--buttons {
+  display: flex;
+  justify-content: center; /* Center buttons horizontally */
+  margin-top: 20px; /* Adds space between task details and buttons */
+}
+
+/* Style for the buttons */
+.todo--buttons button {
+  margin: 0 10px; /* Space between buttons */
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #2980b9; /* Blue color for buttons */
+  color: white; /* Text color for buttons */
+}
+
+.todo--buttons button:hover {
+  background-color: #3498db; /* Lighter blue for hover state */
+}
+
+/* Style for the input fields and buttons when editing */
+.edit-fields input,
+.edit-fields select,
+.edit-fields textarea,
+.edit-fields button {
+  display: block; /* Makes each input and button take the full width */
+  margin: 10px 0; /* Adds space between the inputs and buttons */
+  /* Other input and button styles */
 }
